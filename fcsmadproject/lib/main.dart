@@ -1,4 +1,6 @@
 import 'package:fcsmadproject/views/LadingView.dart';
+import 'package:fcsmadproject/views/ProfileView.dart';
+//import 'package:fcsmadproject/views/ProfileView.dart';
 import 'package:fcsmadproject/views/VerificationEmail.dart';
 import 'package:fcsmadproject/views/registerView.dart';
 import 'package:fcsmadproject/views/LoginView.dart';
@@ -22,6 +24,7 @@ void main() {
         LoginViewRoute: (context) => const LoginView(),
         landingViewRoute: (context) => const LandingView(),
         VerificationViewRoute: (context) => const VerificationEmail(),
+        profileView: (context) => const ProfileView(),
       },
     ),
   );
@@ -32,14 +35,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /*
-       FutureBuilder is used to build the widget when the future is completed
-       so we call the firebase.initializeApp method to initialize the firebase before
-       creating the widgets and in builder we can implement things according to the 
-       state of future such as while loading we can put the loading window and when
-       it is completed we returned the column widget! then they can also buuild this thngs
-       using the plus function as compared to other values.
-       */
     return FutureBuilder(
       future: Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform,

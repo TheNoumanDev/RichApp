@@ -7,6 +7,9 @@ import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
 import 'package:fcsmadproject/constants/routes.dart';
 import 'package:flutter/services.dart';
+
+import '../utilities/auth_services.dart';
+import 'ProfileView.dart';
 //import 'package:practice_app/constants/routes.dart';
 
 //import '../Utilitites/Error_dialogue.dart';
@@ -266,16 +269,61 @@ class _RegisterViewState extends State<LoginView> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          _buildSocialBtn(
-            () => print('Login with Facebook'),
-            const AssetImage(
-              'assets/images/icons8-facebook-48.png',
+          GestureDetector(
+            onTap: () {},
+            child: Container(
+              height: 60.0,
+              width: 60.0,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black26,
+                    offset: Offset(0, 2),
+                    blurRadius: 6.0,
+                  ),
+                ],
+                image: DecorationImage(
+                  image: AssetImage(
+                    'assets/images/icons8-facebook-48.png',
+                  ),
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
           ),
-          _buildSocialBtn(
-            () => print('Login with Google'),
-            const AssetImage(
-              'assets/images/icons8-google-48.png',
+          GestureDetector(
+            onTap: () {
+              Authservice.signInWithGoogle().then((result) {
+                if (result != null) {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (context) => const ProfileView()),
+                  );
+                }
+              });
+            },
+            child: Container(
+              height: 60.0,
+              width: 60.0,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black26,
+                    offset: Offset(0, 2),
+                    blurRadius: 6.0,
+                  ),
+                ],
+                image: DecorationImage(
+                  image: AssetImage(
+                    'assets/images/icons8-google-48.png',
+                  ),
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
           ),
         ],

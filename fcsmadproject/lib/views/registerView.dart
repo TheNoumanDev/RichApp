@@ -3,6 +3,7 @@
 //import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:fcsmadproject/utilities/helpingFuntions.dart';
+import 'package:fcsmadproject/views/ProfileView.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
@@ -10,6 +11,7 @@ import 'dart:developer' as devtools show log;
 import 'package:flutter/services.dart';
 
 import '../constants/routes.dart';
+import '../utilities/auth_services.dart';
 //import 'package:practice_app/constants/routes.dart';
 
 //import '../Utilitites/Error_dialogue.dart';
@@ -48,7 +50,9 @@ class _RegisterViewState extends State<RegisterView> {
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () {
+            FocusScope.of(context).unfocus();
+          },
           child: Stack(
             children: <Widget>[
               Container(
@@ -306,9 +310,17 @@ class _RegisterViewState extends State<RegisterView> {
     );
   }
 
-  Widget _buildSocialBtn(Function onTap, AssetImage logo) {
+  Widget _buildSocialBtn(AssetImage logo) {
     return GestureDetector(
-      onTap: () => onTap,
+      onTap: () {
+        Authservice.signInWithGoogle().then((result) {
+          if (result != null) {
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const ProfileView()),
+            );
+          }
+        });
+      },
       child: Container(
         height: 60.0,
         width: 60.0,
@@ -337,16 +349,61 @@ class _RegisterViewState extends State<RegisterView> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          _buildSocialBtn(
-            () => print('Login with Facebook'),
-            const AssetImage(
-              'assets/images/icons8-facebook-48.png',
+          GestureDetector(
+            onTap: () {},
+            child: Container(
+              height: 60.0,
+              width: 60.0,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black26,
+                    offset: Offset(0, 2),
+                    blurRadius: 6.0,
+                  ),
+                ],
+                image: DecorationImage(
+                  image: AssetImage(
+                    'assets/images/icons8-facebook-48.png',
+                  ),
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
           ),
-          _buildSocialBtn(
-            () => print('Login with Google'),
-            const AssetImage(
-              'assets/images/icons8-google-48.png',
+          GestureDetector(
+            onTap: () {
+              Authservice.signInWithGoogle().then((result) {
+                if (result != null) {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (context) => const ProfileView()),
+                  );
+                }
+              });
+            },
+            child: Container(
+              height: 60.0,
+              width: 60.0,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black26,
+                    offset: Offset(0, 2),
+                    blurRadius: 6.0,
+                  ),
+                ],
+                image: DecorationImage(
+                  image: AssetImage(
+                    'assets/images/icons8-google-48.png',
+                  ),
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
           ),
         ],
