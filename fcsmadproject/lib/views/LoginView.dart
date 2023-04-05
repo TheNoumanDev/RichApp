@@ -208,7 +208,7 @@ class _RegisterViewState extends State<LoginView> {
         child: const Text(
           'SIGN IN',
           style: TextStyle(
-            color: Color(0xFF527DAA),
+            color: Color.fromRGBO(37, 24, 78, 1),
             letterSpacing: 1.5,
             fontSize: 18.0,
             fontWeight: FontWeight.bold,
@@ -377,10 +377,10 @@ class _RegisterViewState extends State<LoginView> {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      Color(0xFF73AEF5),
-                      Color(0xFF61A4F1),
-                      Color(0xFF478DE0),
-                      Color(0xFF398AE5),
+                      Color.fromRGBO(37, 24, 78, 0.4),
+                      Color.fromRGBO(37, 24, 78, 0.6),
+                      Color.fromRGBO(37, 24, 78, 0.8),
+                      Color.fromRGBO(37, 24, 78, 1),
                     ],
                     stops: [0.1, 0.4, 0.7, 0.9],
                   ),

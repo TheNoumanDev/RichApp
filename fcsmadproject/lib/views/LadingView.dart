@@ -38,7 +38,8 @@ class _LandingViewState extends State<LandingView>
     final color = Colors.white;
     _scale = 1 - _controller.value;
     return Scaffold(
-      backgroundColor: Color(0xFF6CA8F1),
+      //color: Color.fromRGBO(37, 24, 78, 1),
+      backgroundColor: Color.fromRGBO(37, 24, 78, 1),
       body: Center(
           child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
@@ -168,7 +169,7 @@ class _LandingViewState extends State<LandingView>
             style: TextStyle(
               fontSize: 20.0,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF6CA8F1),
+              color: Color.fromRGBO(37, 24, 78, 1),
             ),
           ),
         ),
