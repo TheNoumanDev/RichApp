@@ -19,19 +19,6 @@ class _ProfileViewState extends State<ProfileView> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      // appBar: AppBar(
-      //   actions: [
-      //     IconButton(
-      //       onPressed: () {
-      //         FirebaseAuth.instance.signOut();
-      //         GoogleSignIn().signOut();
-      //         Navigator.of(context).push(
-      //             MaterialPageRoute(builder: (context) => const LoginView()));
-      //       },
-      //       icon: const Icon(Icons.logout),
-      //     ),
-      //   ],
-      // ),
       body: SafeArea(
           child: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
@@ -46,8 +33,18 @@ class _ProfileViewState extends State<ProfileView> {
               horizontal: 12.0,
               vertical: 10.0,
             ),
-            decoration: BoxDecoration(
-              color: Color.fromRGBO(37, 24, 78, 1),
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color.fromRGBO(37, 24, 78, 0.5),
+                  Color.fromRGBO(37, 24, 78, 0.7),
+                  Color.fromRGBO(37, 24, 78, 0.9),
+                  Color.fromRGBO(37, 24, 78, 1),
+                ],
+                stops: [0.1, 0.4, 0.7, 0.9],
+              ),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -55,7 +52,7 @@ class _ProfileViewState extends State<ProfileView> {
                 Text(
                   'Profile',
                   style: GoogleFonts.lobster(
-                    textStyle: TextStyle(
+                    textStyle: const TextStyle(
                       fontSize: 35,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -84,7 +81,7 @@ class _ProfileViewState extends State<ProfileView> {
                               width: innerWidth,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(30),
-                                color: Color.fromRGBO(110, 47, 180, 1),
+                                color: const Color.fromRGBO(110, 47, 180, 0.5),
                               ),
                               child: SingleChildScrollView(
                                 physics: const AlwaysScrollableScrollPhysics(),
@@ -114,7 +111,8 @@ class _ProfileViewState extends State<ProfileView> {
                                       margin: const EdgeInsets.all(10),
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
-                                        color: Color.fromRGBO(60, 24, 96, 1),
+                                        color: const Color.fromRGBO(
+                                            60, 24, 96, 0.6),
                                       ),
                                       child: Row(
                                         mainAxisAlignment:
@@ -131,7 +129,8 @@ class _ProfileViewState extends State<ProfileView> {
                                                 Container(
                                                   height: 30,
                                                   width: 30,
-                                                  decoration: BoxDecoration(
+                                                  decoration:
+                                                      const BoxDecoration(
                                                     image: DecorationImage(
                                                       image: AssetImage(
                                                         'assets/images/icons8-coins-32.png',
@@ -182,7 +181,7 @@ class _ProfileViewState extends State<ProfileView> {
                                               Container(
                                                 height: 30,
                                                 width: 30,
-                                                decoration: BoxDecoration(
+                                                decoration: const BoxDecoration(
                                                   image: DecorationImage(
                                                     image: AssetImage(
                                                       'assets/images/icons8-cash-32.png',
@@ -219,27 +218,43 @@ class _ProfileViewState extends State<ProfileView> {
                                       height: innerHeight * 0.53,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
-                                        color: Color.fromRGBO(60, 24, 96, 1),
+                                        color: const Color.fromRGBO(
+                                            60, 24, 96, 0.6),
                                       ),
                                       child: SingleChildScrollView(
                                         child: Column(
                                           children: [
                                             ReuseableRow(
-                                                title: "Personal Details",
-                                                image: AssetImage(
-                                                    'assets/images/icons8-male-user-32.png')),
+                                              title: "Personal Details",
+                                              image: const AssetImage(
+                                                  'assets/images/icons8-male-user-32.png'),
+                                              onTap: () {},
+                                            ),
                                             ReuseableRow(
-                                                title: "Privacy Policy",
-                                                image: AssetImage(
-                                                    'assets/images/icons8-user-shield-32.png')),
+                                              title: "Privacy Policy",
+                                              image: const AssetImage(
+                                                  'assets/images/icons8-user-shield-32.png'),
+                                              onTap: () {},
+                                            ),
                                             ReuseableRow(
-                                                title: "Rate Us",
-                                                image: AssetImage(
-                                                    'assets/images/icons8-star-32.png')),
+                                              title: "Rate Us",
+                                              image: const AssetImage(
+                                                  'assets/images/icons8-star-32.png'),
+                                              onTap: () {},
+                                            ),
                                             ReuseableRow(
-                                                title: "Logout",
-                                                image: AssetImage(
-                                                    'assets/images/icons8-login-32.png')),
+                                              title: "Logout",
+                                              image: const AssetImage(
+                                                  'assets/images/icons8-login-32.png'),
+                                              onTap: () {
+                                                FirebaseAuth.instance.signOut();
+                                                GoogleSignIn().signOut();
+                                                Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            const LoginView()));
+                                              },
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -281,33 +296,18 @@ class _ProfileViewState extends State<ProfileView> {
         ),
       )),
     );
-
-//     Scaffold(
-//       appBar: AppBar(
-//         title: Text('Profile'),
-//         actions: [
-//           IconButton(
-//             icon: const Icon(Icons.logout),
-//             onPressed: () async {
-//               await GoogleSignIn().signOut();
-//               FirebaseAuth.instance.signOut();
-//               Navigator.of(context)
-//                   .pushNamedAndRemoveUntil(LoginViewRoute, (route) => false);
-//             },
-//           ),
-//         ],
-//       ),
-//       body: const Center(
-//         child: Text('you are login'),
-//       ),
-//     );
   }
 }
 
 class ReuseableRow extends StatelessWidget {
   String title;
   AssetImage image;
-  ReuseableRow({super.key, required this.title, required this.image});
+  final Function()? onTap;
+  ReuseableRow(
+      {super.key,
+      required this.title,
+      required this.image,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -316,41 +316,44 @@ class ReuseableRow extends StatelessWidget {
         Padding(
           padding:
               const EdgeInsets.only(top: 11.0, right: 8, left: 8, bottom: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Container(
-                    height: 30,
-                    width: 30,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: image,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Text(
-                      title,
-                      style: GoogleFonts.lobster(
-                        textStyle: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 15,
+          child: GestureDetector(
+            onTap: onTap,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      height: 30,
+                      width: 30,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: image,
+                          fit: BoxFit.cover,
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              Icon(
-                Icons.arrow_forward_ios,
-                color: Colors.white,
-                size: 30,
-              ),
-            ],
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Text(
+                        title,
+                        style: GoogleFonts.lobster(
+                          textStyle: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.white,
+                  size: 30,
+                ),
+              ],
+            ),
           ),
         ),
         // SizedBox(height: MediaQuery.of(context).size.height * 0.02),

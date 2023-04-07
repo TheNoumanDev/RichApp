@@ -2,6 +2,7 @@
 
 //import 'package:firebase_auth/firebase_auth.dart';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fcsmadproject/utilities/helpingFuntions.dart';
 import 'package:fcsmadproject/views/ProfileView.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -27,11 +28,13 @@ class _RegisterViewState extends State<RegisterView> {
   // Variables
   late final TextEditingController _email;
   late final TextEditingController _password;
+  late final TextEditingController _confirmPassword;
 
   @override
   void initState() {
     _email = TextEditingController();
     _password = TextEditingController();
+    _confirmPassword = TextEditingController();
     super.initState();
   }
 
@@ -78,7 +81,7 @@ class _RegisterViewState extends State<RegisterView> {
                   physics: const AlwaysScrollableScrollPhysics(),
                   padding: const EdgeInsets.symmetric(
                     horizontal: 40.0,
-                    vertical: 120.0,
+                    vertical: 70.0,
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -95,9 +98,13 @@ class _RegisterViewState extends State<RegisterView> {
                       const SizedBox(height: 30.0),
                       _buildEmailTF(),
                       const SizedBox(
-                        height: 30.0,
+                        height: 20.0,
                       ),
                       _buildPasswordTF(),
+                      const SizedBox(
+                        height: 10.0,
+                      ),
+                      _buildConfirmPasswordTF(),
                       //_buildForgotPasswordBtn(),
                       //  _buildRememberMeCheckbox(),
                       _buildSignUpBtn(),
@@ -196,6 +203,38 @@ class _RegisterViewState extends State<RegisterView> {
     );
   }
 
+  Widget _buildConfirmPasswordTF() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const SizedBox(height: 10.0),
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: kBoxDecorationStyle,
+          height: 60.0,
+          child: TextField(
+            controller: _confirmPassword,
+            obscureText: true,
+            style: const TextStyle(
+              color: Colors.white,
+              fontFamily: 'OpenSans',
+            ),
+            decoration: const InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 14.0),
+              prefixIcon: Icon(
+                Icons.lock,
+                color: Colors.white,
+              ),
+              hintText: 'Confirm Password',
+              hintStyle: kHintTextStyle,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget _buildForgotPasswordBtn() {
     return Container(
       alignment: Alignment.centerRight,
@@ -253,9 +292,25 @@ class _RegisterViewState extends State<RegisterView> {
           try {
             final email = _email.text;
             final password = _password.text;
+            final confirmPass = _confirmPassword.text;
+            if (password != confirmPass) {
+              ShowDialogGeneric(context, "Passwords do not match.");
+              return;
+            }
             final userCredential = await FirebaseAuth.instance
                 .createUserWithEmailAndPassword(
                     email: email, password: password);
+            FirebaseFirestore.instance
+                .collection("users")
+                .doc(userCredential.user!.uid)
+                .set({
+              "email": userCredential.user!.email,
+              // "name": userCredential.user!.displayName,
+              // "photo": userCredential.user!.photoURL,
+              "uid": userCredential.user!.uid
+            });
+            Navigator.of(context)
+                .pushNamedAndRemoveUntil(profileView, (route) => false);
           } on FirebaseAuthException catch (e) {
             if (e.code == "weak-password") {
               ShowDialogGeneric(context, "The password provided is too weak.");
@@ -313,13 +368,16 @@ class _RegisterViewState extends State<RegisterView> {
   Widget _buildSocialBtn(AssetImage logo) {
     return GestureDetector(
       onTap: () {
-        Authservice.signInWithGoogle().then((result) {
-          if (result != null) {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const ProfileView()),
-            );
-          }
-        });
+        Authservice.signInWithGoogle().then(
+          (result) {
+            if (result == false) {
+              ShowDialogGeneric(context, "Something went wrong. Login failed.");
+            } else {
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil(profileView, (route) => false);
+            }
+          },
+        );
       },
       child: Container(
         height: 60.0,
@@ -350,7 +408,13 @@ class _RegisterViewState extends State<RegisterView> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Authservice.signInWithFacebook().then((result) {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const ProfileView()),
+                );
+              });
+            },
             child: Container(
               height: 60.0,
               width: 60.0,
@@ -376,12 +440,9 @@ class _RegisterViewState extends State<RegisterView> {
           GestureDetector(
             onTap: () {
               Authservice.signInWithGoogle().then((result) {
-                if (result != null) {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                        builder: (context) => const ProfileView()),
-                  );
-                }
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const ProfileView()),
+                );
               });
             },
             child: Container(

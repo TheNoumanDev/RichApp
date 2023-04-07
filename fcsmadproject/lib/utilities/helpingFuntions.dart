@@ -32,7 +32,11 @@ Future<void> ShowDialogGeneric(
     builder: (context) {
       return AlertDialog(
         title: const Text("Error Occoured"),
-        content: Text(text),
+        content: Text(
+          text,
+          style:
+              const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        ),
         actions: [
           TextButton(
             onPressed: () {

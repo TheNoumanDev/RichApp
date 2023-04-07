@@ -1,7 +1,7 @@
 import 'package:fcsmadproject/views/DelayedAnimation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+//import 'package:flutter/src/widgets/framework.dart';
+//import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:avatar_glow/avatar_glow.dart' show AvatarGlow;
 
 import '../constants/routes.dart';
@@ -22,7 +22,7 @@ class _LandingViewState extends State<LandingView>
   void initState() {
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(
+      duration: const Duration(
         milliseconds: 200,
       ),
       lowerBound: 0.0,
@@ -35,11 +35,11 @@ class _LandingViewState extends State<LandingView>
 
   @override
   Widget build(BuildContext context) {
-    final color = Colors.white;
+    const color = Colors.white;
     _scale = 1 - _controller.value;
     return Scaffold(
       //color: Color.fromRGBO(37, 24, 78, 1),
-      backgroundColor: Color.fromRGBO(37, 24, 78, 1),
+      backgroundColor: const Color.fromRGBO(37, 24, 78, 1),
       body: Center(
           child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
@@ -54,11 +54,11 @@ class _LandingViewState extends State<LandingView>
             ),
             AvatarGlow(
               endRadius: 90,
-              duration: Duration(seconds: 2),
+              duration: const Duration(seconds: 2),
               glowColor: Colors.white24,
               repeat: true,
-              repeatPauseDuration: Duration(seconds: 1),
-              startDelay: Duration(seconds: 1),
+              repeatPauseDuration: const Duration(seconds: 1),
+              startDelay: const Duration(seconds: 1),
               child: Material(
                   elevation: 8.0,
                   shape: const CircleBorder(),
@@ -73,42 +73,43 @@ class _LandingViewState extends State<LandingView>
               height: 30.0,
             ),
             DelayedAnimation(
+              delay: delayedAmount + 1000,
               child: Text(
                 "Hi There",
                 style: TextStyle(
                     fontWeight: FontWeight.bold, fontSize: 35.0, color: color),
               ),
-              delay: delayedAmount + 1000,
             ),
             DelayedAnimation(
+              delay: delayedAmount + 2000,
               child: Text(
                 "I'm RichApp",
                 style: TextStyle(
                     fontWeight: FontWeight.bold, fontSize: 35.0, color: color),
               ),
-              delay: delayedAmount + 2000,
             ),
-            SizedBox(
+            const SizedBox(
               height: 40.0,
             ),
             DelayedAnimation(
+              delay: delayedAmount + 3000,
               child: Text(
                 "WHERE YOU CAN",
                 style: TextStyle(fontSize: 20.0, color: color),
               ),
-              delay: delayedAmount + 3000,
             ),
             DelayedAnimation(
+              delay: delayedAmount + 3000,
               child: Text(
                 "BECOME RICHER THAN ME!!",
                 style: TextStyle(fontSize: 20.0, color: color),
               ),
-              delay: delayedAmount + 3000,
             ),
-            SizedBox(
+            const SizedBox(
               height: 100.0,
             ),
             DelayedAnimation(
+              delay: delayedAmount + 4000,
               child: GestureDetector(
                 onTapDown: _onTapDown,
                 onTapUp: _onTapUp,
@@ -121,9 +122,8 @@ class _LandingViewState extends State<LandingView>
                       registerViewRoute, (route) => false);
                 },
               ),
-              delay: delayedAmount + 4000,
             ),
-            SizedBox(
+            const SizedBox(
               height: 50.0,
             ),
             // DelayedAnimation(
@@ -166,7 +166,7 @@ class _LandingViewState extends State<LandingView>
         child: Center(
           child: Text(
             r,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 20.0,
               fontWeight: FontWeight.bold,
               color: Color.fromRGBO(37, 24, 78, 1),
