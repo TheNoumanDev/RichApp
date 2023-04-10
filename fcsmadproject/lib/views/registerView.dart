@@ -42,6 +42,7 @@ class _RegisterViewState extends State<RegisterView> {
   void dispose() {
     _email.dispose();
     _password.dispose();
+    _confirmPassword.dispose();
     super.dispose();
   }
 
@@ -83,35 +84,37 @@ class _RegisterViewState extends State<RegisterView> {
                     horizontal: 40.0,
                     vertical: 70.0,
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      const Text(
-                        'Sign Up',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'OpenSans',
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold,
+                  child: Form(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        const Text(
+                          'Sign Up',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'OpenSans',
+                            fontSize: 30.0,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 30.0),
-                      _buildEmailTF(),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      _buildPasswordTF(),
-                      const SizedBox(
-                        height: 10.0,
-                      ),
-                      _buildConfirmPasswordTF(),
-                      //_buildForgotPasswordBtn(),
-                      //  _buildRememberMeCheckbox(),
-                      _buildSignUpBtn(),
-                      _buildSignInWithText(),
-                      _buildSocialBtnRow(),
-                      _buildSignupBtn(),
-                    ],
+                        const SizedBox(height: 30.0),
+                        _buildEmailTF(),
+                        const SizedBox(
+                          height: 20.0,
+                        ),
+                        _buildPasswordTF(),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        _buildConfirmPasswordTF(),
+                        //_buildForgotPasswordBtn(),
+                        //  _buildRememberMeCheckbox(),
+                        _buildSignUpBtn(),
+                        _buildSignInWithText(),
+                        _buildSocialBtnRow(),
+                        _buildSignupBtn(),
+                      ],
+                    ),
                   ),
                 ),
               )
@@ -131,14 +134,6 @@ class _RegisterViewState extends State<RegisterView> {
           style: kLabelStyle,
         ),
         const SizedBox(height: 10.0),
-        // TextField(
-        //   keyboardType: TextInputType.text,
-        //   decoration: const InputDecoration(
-        //     border: OutlineInputBorder(),
-        //     labelText: 'Status',
-        //     hintText: 'Enter status',
-        //   ),
-        // ),
         Container(
           alignment: Alignment.centerLeft,
           decoration: kBoxDecorationStyle,
@@ -305,12 +300,12 @@ class _RegisterViewState extends State<RegisterView> {
                 .doc(userCredential.user!.uid)
                 .set({
               "email": userCredential.user!.email,
-              // "name": userCredential.user!.displayName,
-              // "photo": userCredential.user!.photoURL,
+              "name": '',
+              "photo": '',
               "uid": userCredential.user!.uid
             });
             Navigator.of(context)
-                .pushNamedAndRemoveUntil(profileView, (route) => false);
+                .pushNamedAndRemoveUntil(userInfoView, (route) => false);
           } on FirebaseAuthException catch (e) {
             if (e.code == "weak-password") {
               ShowDialogGeneric(context, "The password provided is too weak.");
@@ -374,7 +369,7 @@ class _RegisterViewState extends State<RegisterView> {
               ShowDialogGeneric(context, "Something went wrong. Login failed.");
             } else {
               Navigator.of(context)
-                  .pushNamedAndRemoveUntil(profileView, (route) => false);
+                  .pushNamedAndRemoveUntil(userInfoView, (route) => false);
             }
           },
         );

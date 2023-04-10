@@ -1,5 +1,6 @@
 import 'package:fcsmadproject/views/LadingView.dart';
 import 'package:fcsmadproject/views/ProfileView.dart';
+import 'package:fcsmadproject/views/UserInfoView.dart';
 //import 'package:fcsmadproject/views/ProfileView.dart';
 import 'package:fcsmadproject/views/VerificationEmail.dart';
 import 'package:fcsmadproject/views/registerView.dart';
@@ -14,6 +15,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -25,6 +27,7 @@ void main() {
         landingViewRoute: (context) => const LandingView(),
         VerificationViewRoute: (context) => const VerificationEmail(),
         profileView: (context) => const ProfileView(),
+        userInfoView: (context) => const UserInfoView(),
       },
     ),
   );
@@ -50,9 +53,9 @@ class HomePage extends StatelessWidget {
               return const LandingView(); //LoginView();
             } else {
               if (currentUser.emailVerified) {
-                return const LandingView();
+                return const ProfileView();
               } else {
-                return const LandingView(); //verifyEmailView();
+                return const ProfileView(); //verifyEmailView();
               }
             }
           // Navigator.of(context).push(MaterialPageRoute(
