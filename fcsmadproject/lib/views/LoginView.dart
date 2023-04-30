@@ -50,14 +50,6 @@ class _RegisterViewState extends State<LoginView> {
           style: kLabelStyle,
         ),
         const SizedBox(height: 10.0),
-        // TextField(
-        //   keyboardType: TextInputType.text,
-        //   decoration: const InputDecoration(
-        //     border: OutlineInputBorder(),
-        //     labelText: 'Status',
-        //     hintText: 'Enter status',
-        //   ),
-        // ),
         Container(
           alignment: Alignment.centerLeft,
           decoration: kBoxDecorationStyle,
@@ -71,12 +63,10 @@ class _RegisterViewState extends State<LoginView> {
             ),
             decoration: const InputDecoration(
               border: InputBorder.none,
-              //contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
                 Icons.email,
                 color: Colors.white,
               ),
-
               hintText: 'Enter your Email',
               hintStyle: kHintTextStyle,
             ),
@@ -132,33 +122,6 @@ class _RegisterViewState extends State<LoginView> {
           'Forgot Password?',
           style: kLabelStyle,
         ),
-      ),
-    );
-  }
-
-  Widget _buildRememberMeCheckbox() {
-    return Container(
-      height: 20.0,
-      child: Row(
-        children: <Widget>[
-          Theme(
-            data: ThemeData(unselectedWidgetColor: Colors.white),
-            child: Checkbox(
-              value: _rememberMe,
-              checkColor: Colors.green,
-              activeColor: Colors.white,
-              onChanged: (value) {
-                setState(() {
-                  _rememberMe = value!;
-                });
-              },
-            ),
-          ),
-          const Text(
-            'Remember me',
-            style: kLabelStyle,
-          ),
-        ],
       ),
     );
   }

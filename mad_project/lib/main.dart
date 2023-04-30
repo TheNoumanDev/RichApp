@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:mad_project/Home.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:get/get.dart';
+import 'package:mad_project/src/features/authentication/screens/splash_screen/splash_screen.dart';
 
 void main() {
   runApp(
-    MaterialApp(
+    GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        brightness: Brightness.light,
       ),
-      home: const HomePage(),
+      home: splashScreen(),
     ),
   );
 }

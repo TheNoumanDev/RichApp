@@ -1,0 +1,91 @@
+{
+  "project_info": {
+    "project_number": "288088513521",
+    "firebase_url": "https://fcsmadproject-default-rtdb.firebaseio.com",
+    "project_id": "fcsmadproject",
+    "storage_bucket": "fcsmadproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:288088513521:android:5612cbd85e7dc9c2e3c250",
+        "android_client_info": {
+          "package_name": "com.example.fcsmadproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "288088513521-fu3g2ofr1g34vcj6l893pf0kggodgm95.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fcsmadproject",
+            "certificate_hash": "f72b64abeb34d713f64e54f647b17ef4b97d7e7b"
+          }
+        },
+        {
+          "client_id": "288088513521-io2tuqekm0tbpofhncdamdutfsk0uo2g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTvDyCn-VD8L7koZufrb6AuM-dXnms2v0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "288088513521-8kh5tn85m99b147abi2qsngeb1kvkr9c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "288088513521-dmm6f3hkoo9lhgnoqq69c9qle22792t0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.fcsmadproject"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:288088513521:android:694251ef82d8035de3c250",
+        "android_client_info": {
+          "package_name": "com.example.mad_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "288088513521-io2tuqekm0tbpofhncdamdutfsk0uo2g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTvDyCn-VD8L7koZufrb6AuM-dXnms2v0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "288088513521-8kh5tn85m99b147abi2qsngeb1kvkr9c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "288088513521-dmm6f3hkoo9lhgnoqq69c9qle22792t0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.fcsmadproject"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
