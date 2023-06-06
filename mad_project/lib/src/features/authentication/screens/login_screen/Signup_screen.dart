@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:get/get.dart';
 import '../../../../common_widgets/re-usable-widgets/resuable.dart';
 import '../../../../constants/colors.dart';
 import '../../../../constants/image_strings.dart';
+import 'login_screen.dart';
 
 class SignUp_screen extends StatelessWidget {
   SignUp_screen({super.key});
@@ -267,8 +268,7 @@ class SignUp_screen extends StatelessWidget {
 
   Widget _buildSigninBtn() {
     return GestureDetector(
-      // onTap: () => Navigator.of(context)
-      //     .pushNamedAndRemoveUntil(LoginViewRoute, (route) => false),
+      onTap: () => Get.to(() => LoginScreen()),
       child: RichText(
         text: const TextSpan(
           children: [
