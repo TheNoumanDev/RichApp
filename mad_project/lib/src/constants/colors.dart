@@ -12,3 +12,6 @@ const LinearGradient backgroundColorGradient = LinearGradient(
   ],
   stops: [0.1, 0.4, 0.7, 0.9],
 );
+
+const Color blackColorr = Colors.black;
+const Color whiteColor = Colors.white;

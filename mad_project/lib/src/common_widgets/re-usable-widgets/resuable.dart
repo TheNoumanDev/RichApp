@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 Widget buildTextField(String mainText, Icon preicon, String hintText,
+    TextEditingController controller,
     [IconButton? postIcon]) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -12,7 +13,7 @@ Widget buildTextField(String mainText, Icon preicon, String hintText,
         decoration: rBoxDecorationStyle,
         height: 60.0,
         child: TextFormField(
-          //controller: _email,
+          controller: controller,
           keyboardType: TextInputType.emailAddress,
           style: const TextStyle(
             color: Colors.white,
@@ -30,7 +31,7 @@ Widget buildTextField(String mainText, Icon preicon, String hintText,
   );
 }
 
-Widget buildButton(String text) {
+Widget buildButton(String text, Function()? onpressed) {
   return Container(
     padding: const EdgeInsets.symmetric(vertical: 25.0),
     width: double.infinity,
@@ -41,7 +42,7 @@ Widget buildButton(String text) {
         //borderRadius: BorderRadius.circular(30.0),
         //onPrimary: Colors.white, // foreground
       ),
-      onPressed: () async {},
+      onPressed: onpressed,
       child: Text(text, style: rButtonTextStyle),
     ),
   );

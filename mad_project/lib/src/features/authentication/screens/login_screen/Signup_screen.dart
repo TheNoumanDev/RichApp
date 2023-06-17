@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../../../common_widgets/re-usable-widgets/resuable.dart';
 import '../../../../constants/colors.dart';
 import '../../../../constants/image_strings.dart';
+import '../../controllers/sign_up_controller.dart';
 import 'login_screen.dart';
 
 class SignUp_screen extends StatelessWidget {
@@ -13,6 +14,8 @@ class SignUp_screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(SignUpController());
+    final _formKey = GlobalKey<FormState>();
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
@@ -38,6 +41,7 @@ class SignUp_screen extends StatelessWidget {
                     vertical: 70.0,
                   ),
                   child: Form(
+                    key: _formKey,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -57,7 +61,8 @@ class SignUp_screen extends StatelessWidget {
                               Icons.person,
                               color: Colors.white,
                             ),
-                            "Enter your Full Name"),
+                            "Enter your Full Name",
+                            controller.nameController),
                         const SizedBox(height: 10.0),
                         buildTextField(
                             "Email",
@@ -65,12 +70,14 @@ class SignUp_screen extends StatelessWidget {
                               Icons.email,
                               color: Colors.white,
                             ),
-                            "Enter your Email"),
+                            "Enter your Email",
+                            controller.emailController),
                         const SizedBox(height: 10.0),
                         buildTextField(
                           "Password",
                           const Icon(Icons.lock, color: Colors.white),
                           "Enter your Password",
+                          controller.passwordController,
                           IconButton(
                               onPressed: () {},
                               icon: const Icon(Icons.remove_red_eye_rounded),
@@ -81,6 +88,7 @@ class SignUp_screen extends StatelessWidget {
                           "Confirm Password",
                           const Icon(Icons.lock, color: Colors.white),
                           "Confirm your Password",
+                          controller.confirmPasswordController,
                           IconButton(
                               onPressed: () {},
                               icon: const Icon(Icons.remove_red_eye_rounded),
@@ -91,6 +99,7 @@ class SignUp_screen extends StatelessWidget {
                           "Phone Number",
                           const Icon(Icons.lock, color: Colors.white),
                           "Phone Number with Code",
+                          controller.phoneController,
                         ),
                         _buildSignUpBtn(),
                         _buildSignUpnWithText(),

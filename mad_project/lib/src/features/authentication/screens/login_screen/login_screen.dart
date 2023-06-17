@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../../../common_widgets/re-usable-widgets/resuable.dart';
 import '../../../../constants/colors.dart';
 import '../../../../constants/image_strings.dart';
+import '../../controllers/sign_in_controller.dart';
 import 'Signup_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -13,6 +14,8 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(SignIpController());
+    final _formKey = GlobalKey<FormState>();
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
@@ -37,6 +40,7 @@ class LoginScreen extends StatelessWidget {
                     vertical: 70.0,
                   ),
                   child: Form(
+                    key: _formKey,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -51,17 +55,21 @@ class LoginScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 30.0),
                         buildTextField(
-                            "Email",
-                            const Icon(
-                              Icons.email,
-                              color: Colors.white,
-                            ),
-                            "Enter your Email"),
+                          "Email",
+                          const Icon(
+                            Icons.email,
+                            color: Colors.white,
+                          ),
+                          "Enter your Email",
+                          controller.emailController,
+                        ),
+
                         const SizedBox(height: 20.0),
                         buildTextField(
                           "Password",
                           const Icon(Icons.lock, color: Colors.white),
                           "Enter your Password",
+                          controller.passwordController,
                           IconButton(
                               onPressed: () {},
                               icon: const Icon(Icons.remove_red_eye_rounded),
@@ -75,7 +83,31 @@ class LoginScreen extends StatelessWidget {
                             _buildForgotPasswordBtn(),
                           ],
                         ),
-                        buildButton("SIGN IN"),
+                        buildButton("SIGN IN", () async {
+                          //                  try {
+                          //   final email = _email.text;
+                          //   final password = _password.text;
+                          //   await FirebaseAuth.instance
+                          //       .signInWithEmailAndPassword(email: email, password: password);
+                          //   Navigator.of(context)
+                          //       .pushNamedAndRemoveUntil(landingViewRoute, (route) => false);
+                          // } on FirebaseAuthException catch (e) {
+                          //   // you can check the exception type by e.runtimeType
+                          //   // and then to catch this specific exception you can use
+                          //   // on keyword with type behind catch keyword and then
+                          //   // use the e.code method to check the error code adn implement
+                          //   // the code accordingly.
+                          //   if (e.code == "user-not-found") {
+                          //     ShowDialogGeneric(context, "User Not Found");
+                          //   } else if (e.code == "wrong-password") {
+                          //     ShowDialogGeneric(context, "Wrong Password");
+                          //   } else {
+                          //     ShowDialogGeneric(context, "Error: ${e.code}");
+                          //   }
+                          // } catch (e) {
+                          //   ShowDialogGeneric(context, e.toString());
+                          // }
+                        }),
                         // _buildEmailTF(),
                         // const SizedBox(height: 30.0),
                         // _buildPasswordTF(),
@@ -98,6 +130,7 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
+// Functions to build the widgets
   Widget _buildRememberMeCheckbox() {
     return Container(
       height: 20.0,
