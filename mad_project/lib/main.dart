@@ -1,13 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:mad_project/src/features/authentication/screens/splash_screen/splash_screen.dart';
+import 'package:mad_project/src/repository/authentication_repository/authentication_repository.dart';
 
 import 'firebase_options.dart';
 
 void main() {
-  Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
+      .then((value) => Get.put(AuthenticationRepository()));
   runApp(
     GetMaterialApp(
       title: 'Flutter Demo',
@@ -23,7 +25,7 @@ void main() {
       //     centerTitle: true,
       //   ),
       // ),
-      home: splashScreen(),
+      home: CircularProgressIndicator(),
     ),
   );
 }

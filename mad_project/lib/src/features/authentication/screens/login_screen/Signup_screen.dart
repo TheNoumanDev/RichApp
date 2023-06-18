@@ -101,7 +101,8 @@ class SignUp_screen extends StatelessWidget {
                           "Phone Number with Code",
                           controller.phoneController,
                         ),
-                        _buildSignUpBtn(),
+                        _buildSignUpBtn(controller, controller.emailController,
+                            controller.passwordController, _formKey),
                         _buildSignUpnWithText(),
                         _buildSocialBtnRow(),
                         _buildSigninBtn(),
@@ -132,7 +133,11 @@ class SignUp_screen extends StatelessWidget {
     );
   }
 
-  Widget _buildSignUpBtn() {
+  Widget _buildSignUpBtn(
+      SignUpController controller,
+      TextEditingController email,
+      TextEditingController password,
+      GlobalKey<FormState> formKey) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
@@ -142,6 +147,9 @@ class SignUp_screen extends StatelessWidget {
           elevation: 5.0,
         ),
         onPressed: () async {
+          if (formKey.currentState!.validate()) {
+            SignUpController.instance.registerUser(email.text, password.text);
+          }
           // try {
           //   final email = _email.text;
           //   final password = _password.text;
